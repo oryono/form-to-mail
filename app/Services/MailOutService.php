@@ -15,11 +15,10 @@ class MailOutService
         $email->addContent("text/plain", $content);
         $email->setReplyTo($replyTo['email'], $replyTo['name']);
 
-        $sendgrid = new \SendGrid("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");
+        $sendgrid = new \SendGrid(env('SENDGRID_API_KEY'));
 
         try {
             $response = $sendgrid->send($email);
-//            dd($response);
         } catch (Exception $exception) {
             throw $exception;
         }
